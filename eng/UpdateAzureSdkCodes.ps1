@@ -15,10 +15,12 @@ foreach ($filter in $ServiceDirectoryFilters) {
     Write-Host "$filter" -ForegroundColor Yellow
     if ($ShowSummary)
     {
+        Write-Host "> dotnet msbuild /restore /t:GenerateCode /p:ServiceDirectory=$filter /v:n /ds `"$SdkRepoRoot\eng\service.proj`""
         dotnet msbuild /restore /t:GenerateCode /p:ServiceDirectory=$filter /v:n /ds "$SdkRepoRoot\eng\service.proj"
     }
     else
     {
+        Write-Host "> dotnet msbuild /restore /t:GenerateCode /p:ServiceDirectory=$filter `"$SdkRepoRoot\eng\service.proj`""
         dotnet msbuild /restore /t:GenerateCode /p:ServiceDirectory=$filter "$SdkRepoRoot\eng\service.proj"
     }
     if ($LastExitCode -ne 0) {
